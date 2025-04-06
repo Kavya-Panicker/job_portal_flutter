@@ -20,7 +20,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
   Future<void> _pickImages() async {
     try {
       final result = await file_picker.FilePicker.platform.pickFiles(
-        type: FileType.image,
+        type: file_picker.FileType.image,
         allowMultiple: true,
       );
 

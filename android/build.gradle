@@ -1,12 +1,15 @@
+// Top-level build.gradle file for Flutter Android project
+
 buildscript {
-    ext.kotlin_version = '1.9.0' // updated Kotlin version (1.8.0 is fine too, but 1.9.0 is more stable with AGP 8.2.1)
+    ext.kotlin_version = '1.8.20'
+
     repositories {
         google()
         mavenCentral()
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:8.2.1'
+        classpath 'com.android.tools.build:gradle:8.1.0'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
@@ -19,14 +22,16 @@ allprojects {
     }
 }
 
+// Optional: Set a custom location for build outputs
 rootProject.buildDir = '../build'
+
+// Apply consistent build directory per module and evaluation order
 subprojects {
-    project.buildDir = "${rootProject.buildDir}/${project.name}"
-}
-subprojects {
-    project.evaluationDependsOn(':app')
+    buildDir = "${rootProject.buildDir}/${project.name}"
+    evaluationDependsOn(':app')
 }
 
+// Task to clean the entire project build directory
 tasks.register("clean", Delete) {
     delete rootProject.buildDir
 }
